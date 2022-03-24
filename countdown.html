@@ -3,6 +3,7 @@
   <head>
     <title>COUNTDOWN</title>
     <style>
+      
       body {
           text-align: center;
           padding: 70px 50px;
@@ -12,14 +13,17 @@
 
         #timer {  
           font-size: 15vw;
-          font-weight: 100;
+          font-weight: 900;
           color: white;
-          text-shadow: 0 0 20px #48C8FF;
+          text-shadow: 0 0 20px rgba(0,0,0,1);
+display: flex;
+gap: 12px;
+
       }
 
       div {
             display: block;
-            min-width: 90px;
+            min-width: 20%;
         margin-bottom: 6vw;
       }
             span {
@@ -27,14 +31,17 @@
               display: block;
               font-size: .35em;
               font-weight: 400;
+text-transform: uppercase;
+
             }
+    
     </style>
   </head>
   <body>
     <div id="timer"></div>
     <script>
       const updateTimer = () => {
-        future  = new Date(1651229884 * 1000);
+        future  = new Date(1651209300 * 1000);
         now     = new Date();
         diff    = future - now;
 
@@ -51,10 +58,10 @@
 
         document.getElementById("timer")
           .innerHTML = 
-            '<div>' + d + '<span>days</span></div>' +
-            '<div>' + h + '<span>hours</span></div>' +
-            '<div>' + m + '<span>minutes</span></div>' +
-            '<div>' + s + '<span>seconds</span></div>' ;
+            '<div>' + d + '<span>D</span></div>' +
+            '<div>' + h + '<span>H</span></div>' +
+            '<div>' + m + '<span>M</span></div>' +
+            '<div>' + s + '<span>S</span></div>' ;
       }
       setInterval('updateTimer()', 1000 );
     </script>
