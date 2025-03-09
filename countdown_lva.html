@@ -3,75 +3,52 @@
   <head>
     <title>COUNTDOWN</title>
     <style>
-      html {
-        font-size: 1vw;
-      }
+      
       body {
-        background-color: #333;
-        
-        color: #d4ccb9;
-        margin: 0;
-        padding: 0;
+          text-align: center;
+          padding: 70px 50px;
+          background: #0D1A29;
           font-family: "Helvetica Neue", "Open Sans", helvetica, arial, sans-serif;  
-
         }
 
         #timer {  
-          background: #333 url(stag.jpg) no-repeat center center;
-          background-size: cover;
           font-size: 15vw;
           font-weight: 900;
-          color: d4ccb9;
+          color: white;
           text-shadow: 0 0 20px rgba(0,0,0,1);
-          display: flex;
-          gap: 1vw;
-          justify-content: center;
-          width: 100vw;
-          height: 100vh;
-          position: fixed;
-          top: 0;
-          left: 0;
+display: flex;
+gap: 12px;
+justify-content: center;
       }
-      
+      img {
+        display: block;
+    width: 90%;
+    max-width: 640px;
+    margin: 0 auto;
+      }
 
-      #timer > div {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+      div {
+            display: block;
+            min-width: 20%;
+        margin-bottom: 6vw;
       }
             span {
-              color: #d4ccb9;
-              /* display: block; */
+              color: #B1CDF1;
+              display: block;
               font-size: .35em;
               font-weight: 400;
 text-transform: uppercase;
 
             }
-
-            #content {
-              position: fixed;
-              z-index: 2;
-              top: 50vh;
-              left: 0;
-              text-align: center;
-              font-size: 5vw;
-              text-shadow: 0 0 20px rgba(0,0,0,1);
-            }
     
     </style>
   </head>
   <body>
-    
-    <div id="timer">
-      
-    </div>
-    <div id="content">
-      <h1>Hello David</h1>
-      <p>You have until this timer elapses to pick a Best Man, <b>or one shall be selected for you.</b></p>
-    </div>
+    <img src="lva-new.svg" alt="" />
+    <div id="timer"></div>
     <script>
       const updateTimer = () => {
-        future  = new Date(1742126400 * 1000);
+        future  = new Date(1651209300 * 1000);
         now     = new Date();
         diff    = future - now;
 
