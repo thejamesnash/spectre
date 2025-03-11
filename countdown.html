@@ -3,71 +3,179 @@
   <head>
     <title>COUNTDOWN</title>
     <style>
+      
       html {
         font-size: 1vw;
       }
       body {
         background-color: #333;
-        
         color: #d4ccb9;
         margin: 0;
         padding: 0;
-          font-family: "Helvetica Neue", "Open Sans", helvetica, arial, sans-serif;  
+        font-family: "Helvetica Neue", "Open Sans", helvetica, arial, sans-serif;
+        height: 100vh;
+        width: 100vw;
+        background: #d4ccb9 url(stag.jpg) no-repeat center center;
+        background-size: cover;
+      }
 
-        }
-
-        #timer {  
-          background: #333 url(stag.jpg) no-repeat center center;
-          background-size: cover;
+      #timer {  
+          
           font-size: 15vw;
           font-weight: 900;
-          color: d4ccb9;
+          color: #d4ccb9;
           text-shadow: 0 0 20px rgba(0,0,0,1);
           display: flex;
           gap: 1vw;
           justify-content: center;
-          width: 100vw;
-          height: 100vh;
-          position: fixed;
-          top: 0;
-          left: 0;
       }
       
 
-      #timer > div {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-      }
+            #timer > div {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
             span {
               color: #d4ccb9;
-              /* display: block; */
               font-size: .35em;
               font-weight: 400;
-text-transform: uppercase;
-
+              text-transform: uppercase;
             }
 
             #content {
-              position: fixed;
+              /* position: fixed;
               z-index: 2;
               top: 50vh;
-              left: 0;
+              left: 0; */
+              display: flex;
+              flex-direction: column;
               text-align: center;
               font-size: 5vw;
               text-shadow: 0 0 20px rgba(0,0,0,1);
+              align-items: center;
+              justify-content: center;
+              height: 100vh
+            } 
+
+            .frame {
+              width: 60vw;
+              height: 60vw;
+              background: transparent url("https://png.pngtree.com/png-vector/20241108/ourmid/pngtree-ornate-gold-picture-frame-png-image_14315007.png") center center no-repeat;
+              background-size: cover;
+              margin: 0 auto;
+              position: relative;
+            }
+            .men-outer {
+              width: 28vw;
+              height: 35.3vw;
+              overflow: hidden;
+              position: absolute;
+              top: 13.3vw;
+              left: 15.5vw;
+            }
+            @keyframes swipe {
+              0% { transform: translate3d(0,0,0); }
+              5% { transform: translate3d(-28vw,0,0); }
+              10% { transform: translate3d(-28vw,0,0); }
+              15% { transform: translate3d(-56vw,0,0); }
+              20% { transform: translate3d(-56vw,0,0); }
+              25% { transform: translate3d(-84vw,0,0); }
+              30% { transform: translate3d(-84vw,0,0); }
+              35% { transform: translate3d(-112vw,0,0); }
+              40% { transform: translate3d(-112vw,0,0); }
+              45% { transform: translate3d(-140vw,0,0); }
+              50% { transform: translate3d(-140vw,0,0); }
+              55% { transform: translate3d(-168vw,0,0); }
+              60% { transform: translate3d(-168vw,0,0); }
+              65% { transform: translate3d(-196vw,0,0); }
+              70% { transform: translate3d(-196vw,0,0); }
+              75% { transform: translate3d(-224vw,0,0); }
+              80% { transform: translate3d(-224vw,0,0); }
+              85% { transform: translate3d(-252vw,0,0); }
+              90% { transform: translate3d(-252vw,0,0); }
+              95% { transform: translate3d(-280vw,0,0); }
+              100% { transform: translate3d(-280vw,0,0); }
+            }
+            .men-inner {
+              width: 308vw;
+              height: 35.3vw;
+              display: flex;
+              flex-direction: row;
+              transform: translate3d(0,0,0);
+              animation-name: swipe;
+              animation-timing-function: ease-in-out;
+              animation-duration: 10s;
+              animation-fill-mode: forwards;
+              animation-iteration-count: infinite;
+            }
+
+            .man {
+              background: transparent url("https://assets.codepen.io/1726046/g.png") center center no-repeat;
+              background-size: 150%; 
+              opacity: 0.9;
+              width: 28vw;
+              height: 35.3vw;
+              
+            }
+            .man:nth-of-type(2) {
+              background-image: url("https://assets.codepen.io/1726046/con.png");
+            }
+            .man:nth-of-type(3) {
+              background-image: url("https://assets.codepen.io/1726046/ian.png");
+            }
+            .man:nth-of-type(4) {
+              background-image: url("https://assets.codepen.io/1726046/nash2.png");
+            }
+            .man:nth-of-type(5) {
+              background-image: url("https://assets.codepen.io/1726046/fod.png");
+            }
+            .man:nth-of-type(6) {
+              background-image: url("https://assets.codepen.io/1726046/earl.png");
+            }
+            .man:nth-of-type(7) {
+              background-image: url("https://assets.codepen.io/1726046/ben.png");
+            }
+            .man:nth-of-type(8) {
+              background-image: url("https://assets.codepen.io/1726046/bob.png");
+            }
+            .man:nth-of-type(9) {
+              background-image: url("https://assets.codepen.io/1726046/dan.png");
+            }
+            .man:nth-of-type(10) {
+              background-image: url("https://assets.codepen.io/1726046/ste.png");
+            }
+            .man:nth-of-type(11) {
+              background-image: url("https://assets.codepen.io/1726046/g.png");
             }
     
     </style>
   </head>
   <body>
     
-    <div id="timer">
-      
-    </div>
+    
     <div id="content">
-      <h1>Hello David</h1>
-      <p>You have until this timer elapses to pick a Best Man, <b>or one shall be selected for you.</b></p>
+      <h1>Who will it be?</h1>
+      <div class="frame">
+        <div class="men-outer">
+          <div class="men-inner">
+            <div class="man"></div>
+            <div class="man"></div>
+            <div class="man"></div>
+            <div class="man"></div>
+            <div class="man"></div>
+            <div class="man"></div>
+            <div class="man"></div>
+            <div class="man"></div>
+            <div class="man"></div>
+            <div class="man"></div>
+            <div class="man"></div>
+          </div>
+        </div>
+      </div>
+      <div id="timer">
+      
+      </div>
     </div>
     <script>
       const updateTimer = () => {
