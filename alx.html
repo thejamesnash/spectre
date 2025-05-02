@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>COUNTDOWN</title>
+    <style>
+            
+        body {
+            box-sizing: border-box;
+            height: 100vh;
+            width: 100vw;
+            background: #fddbeb url(legs.png) bottom right no-repeat;
+            background-size: 50vw auto;
+            font-family: "Helvetica Neue", "Open Sans", helvetica, arial, sans-serif;  
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        main {  
+            font-size: 15vw;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 0 2vw #c0387c;
+            width: 75vw;
+            
+        }
+        
+        div {
+            display: flex;
+            align-items: center;
+            gap: 2vw;
+        }
+        b {
+            width: 30%;
+            text-align: right;
+        }
+        span {
+            color: #FFF;
+            text-shadow: 0 0 2vw #c0387c; 
+            font-family: 'Brush Script MT','Lucida Handwriting';
+            text-align: left;
+            width: 60%;
+            font-size: 8vw
+        }
+    
+    </style>
+  </head>
+  <body>
+    <main id="timer"></main>
+    <script>
+      const updateTimer = () => {
+        future  = new Date(1751713200 * 1000);
+        now     = new Date();
+        diff    = future - now;
+
+        days  = Math.floor( diff / (1000*60*60*24) );
+        hours = Math.floor( diff / (1000*60*60) );
+        mins  = Math.floor( diff / (1000*60) );
+        secs  = Math.floor( diff / 1000 );
+
+
+        d = days;
+        h = hours - days  * 24;
+        m = mins  - hours * 60;
+        s = secs  - mins  * 60;
+
+        document.getElementById("timer")
+          .innerHTML = 
+            '<div><b>' + d + '</b><span>Days</span></div>' +
+            '<div><b>' + h + '</b><span>Hours</span></div>' +
+            '<div><b>' + m + '</b><span>Minutes</span></div>' +
+            '<div><b>' + s + '</b><span>Seconds</span></div>' ;
+      }
+      setInterval('updateTimer()', 1000 );
+    </script>
+  </body>
+</html>
