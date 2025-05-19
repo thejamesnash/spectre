@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>COUNTDOWN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
+
+    <style>
+            
+        body {
+            box-sizing: border-box;
+            height: 100vh;
+            width: 100vw;
+            background: #fddbeb url('https://marinesanctuary.org/floridakeysfoundation/wp-content/uploads/sites/4/2020/11/Frink_NMSF_41.jpg') bottom right no-repeat;
+            background-size: cover;
+            /* font-family: "Helvetica Neue", "Open Sans", helvetica, arial, sans-serif; */
+            font-family: "Rye", cursive;
+            font-weight: 400;
+            font-style: normal;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {  
+            font-size: 15vw;
+            color: #FFFFFF;
+            text-shadow: 0 0 2vw #FFF;
+            width: 75vw;
+        }
+        
+        div {
+            display: flex;
+            align-items: center;
+            gap: 3vw;
+        }
+        b {
+            width: 35%;
+            text-align: right;
+            font-weight: 400;
+        }
+        span {
+            color: #FFFFFF;
+            text-shadow: 0 0 2vw #FFF; 
+            text-align: left;
+            width: 60%;
+            font-size: 8vw
+        }
+    
+    </style>
+  </head>
+  <body>
+    <main id="timer"></main>
+    <script>
+      const updateTimer = () => {
+        future  = new Date(1770287401 * 1000);
+        now     = new Date();
+        diff    = future - now;
+
+        days  = Math.floor( diff / (1000*60*60*24) );
+        hours = Math.floor( diff / (1000*60*60) );
+        mins  = Math.floor( diff / (1000*60) );
+        secs  = Math.floor( diff / 1000 );
+
+
+        d = days;
+        h = hours - days  * 24;
+        m = mins  - hours * 60;
+        s = secs  - mins  * 60;
+
+        document.getElementById("timer")
+          .innerHTML = 
+            '<div><b>' + d + '</b><span>Days</span></div>' +
+            '<div><b>' + h + '</b><span>Hours</span></div>' +
+            '<div><b>' + m + '</b><span>Minutes</span></div>' +
+            '<div><b>' + s + '</b><span>Seconds</span></div>' ;
+      }
+      setInterval('updateTimer()', 1000 );
+    </script>
+  </body>
+</html>
