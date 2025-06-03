@@ -833,4 +833,77 @@
         // Specification comparison
         function compareToSpecs() {
             const targetToe = parseFloat(document.getElementById('target-toe').value) || 0;
-            const tolerance = parse
+            const tolerance = parseFloat(document.getElementById('tolerance').value) || 0.5;
+            
+            if (!measurements.datum || !measurements.leftWheel || !measurements.rightWheel) {
+                return;
+            }
+
+            const datum = measurements.datum.heading;
+            const leftWheel = measurements.leftWheel.heading;
+            const rightWheel = measurements.rightWheel.heading;
+
+            let leftToe = leftWheel - datum;
+            let rightToe = rightWheel - datum;
+
+            if (leftToe > 180) leftToe -= 360;
+            if (leftToe < -180) leftToe += 360;
+            if (rightToe > 180) rightToe -= 360;
+            if (rightToe < -180) rightToe += 360;
+
+            const totalToe = leftToe + rightToe;
+            const difference = Math.abs(totalToe - targetToe);
+            
+            let resultHtml = '';
+            let resultClass = '';
+            
+            if (difference <= tolerance) {
+                resultClass = 'within-spec';
+                resultHtml = `
+                    <div style="background: #d4edda; color: #155724; padding: 12px; border-radius: 8px; margin-top: 10px;">
+                        ✅ <strong>Within Specification</strong><br>
+                        Measured: ${totalToe.toFixed(2)}° | Target: ${targetToe.toFixed(2)}° ± ${tolerance}°<br>
+                        Difference: ${difference.toFixed(2)}°
+                    </div>
+                `;
+            } else {
+                resultClass = 'out-of-spec';
+                const adjustment = totalToe > targetToe ? 'reduce toe-in' : 'increase toe-in';
+                resultHtml = `
+                    <div style="background: #f8d7da; color: #721c24; padding: 12px; border-radius: 8px; margin-top: 10px;">
+                        ⚠️ <strong>Out of Specification</strong><br>
+                        Measured: ${totalToe.toFixed(2)}° | Target: ${targetToe.toFixed(2)}° ± ${tolerance}°<br>
+                        Difference: ${difference.toFixed(2)}° - Need to ${adjustment}
+                    </div>
+                `;
+            }
+            
+            document.getElementById('spec-result').innerHTML = resultHtml;
+        }
+
+        // Event listeners
+        enableBtn.addEventListener('click', enableCompass);
+        datumBtn.addEventListener('click', () => measureComponent('datum', datumBtn));
+        leftWheelBtn.addEventListener('click', () => measureComponent('leftWheel', leftWheelBtn));
+        rightWheelBtn.addEventListener('click', () => measureComponent('rightWheel', rightWheelBtn));
+        resetBtn.addEventListener('click', resetAll);
+        helpBtn.addEventListener('click', () => {
+            document.getElementById('help-modal').classList.remove('hidden');
+        });
+
+        // Add specification comparison event listeners
+        document.getElementById('target-toe').addEventListener('input', compareToSpecs);
+        document.getElementById('tolerance').addEventListener('input', compareToSpecs);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStep(1);
+            
+            if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+                updateStatus('This tool requires HTTPS to access compass data.', 'error');
+                enableBtn.disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>
