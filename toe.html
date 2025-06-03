@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compass Bearing Tool</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+            text-align: center;
+        }
+
+        .app-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .level-container {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .level-outer {
+            width: 120px;
+            height: 120px;
+            border: 3px solid #333;
+            border-radius: 50%;
+            position: relative;
+            margin: 20px auto;
+            background: linear-gradient(45deg, #e9ecef 25%, transparent 25%), 
+                        linear-gradient(-45deg, #e9ecef 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #e9ecef 75%), 
+                        linear-gradient(-45deg, transparent 75%, #e9ecef 75%);
+            background-size: 10px 10px;
+            background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+        }
+
+        .level-bubble {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -12px 0 0 -12px;
+            transition: all 0.15s ease;
+            border: 2px solid rgba(255,255,255,0.8);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .level-good { 
+            background: #28a745;
+            box-shadow: 0 0 15px rgba(40, 167, 69, 0.6);
+        }
+        .level-okay { 
+            background: #ffc107;
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
+        }
+        .level-bad { 
+            background: #dc3545;
+            box-shadow: 0 0 15px rgba(220, 53, 69, 0.6);
+        }
+
+        .crosshairs {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            margin: -15px 0 0 -15px;
+            border: 2px solid #666;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        .crosshairs::before,
+        .crosshairs::after {
+            content: '';
+            position: absolute;
+            background: #666;
+        }
+
+        .crosshairs::before {
+            top: 50%;
+            left: 25%;
+            right: 25%;
+            height: 1px;
+            margin-top: -0.5px;
+        }
+
+        .crosshairs::after {
+            left: 50%;
+            top: 25%;
+            bottom: 25%;
+            width: 1px;
+            margin-left: -0.5px;
+        }
+
+        .tilt-readings {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .tilt-reading {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .capture-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px 10px;
+            min-width: 120px;
+            transition: all 0.2s ease;
+        }
+
+        .capture-btn:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
+
+        .capture-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .clear-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .status.waiting {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .status.ready {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .results {
+            background: #e7f3ff;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .position-item {
+            margin: 8px 0;
+            padding: 8px;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .heading-difference {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+            border-radius: 0 8px 8px 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <h1>🧭 Compass Bearing Tool</h1>
+        
+        <div class="instructions">
+            <strong>Instructions:</strong><br>
+            1. Hold device flat (green bubble = level)<br>
+            2. Click "Capture Position" at first location<br>
+            3. Move to second location, keep device flat<br>
+            4. Click "Capture Position" again<br>
+            5. View the heading difference between positions
+        </div>
+
+        <div class="level-container">
+            <h3>Device Level Indicator</h3>
+            <div class="level-outer">
+                <div class="level-bubble level-bad" id="bubble"></div>
+                <div class="crosshairs"></div>
+            </div>
+            <div class="tilt-readings">
+                <div class="tilt-reading">
+                    <strong>Tilt X:</strong><br>
+                    <span id="tilt-x">0°</span>
+                </div>
+                <div class="tilt-reading">
+                    <strong>Tilt Y:</strong><br>
+                    <span id="tilt-y">0°</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="status waiting" id="status">
+            Click "Enable Compass" to begin
+        </div>
+
+        <button class="capture-btn" id="enableBtn">Enable Compass</button>
+        <button class="capture-btn" id="captureBtn" disabled>Capture Position</button>
+        <br>
+        <button class="clear-btn" id="clearBtn">Clear All Positions</button>
+
+        <div class="results" id="results" style="display: none;">
+            <h3>📍 Captured Positions</h3>
+            <div id="positions-list"></div>
+        </div>
+
+        <div id="heading-difference" style="display: none;"></div>
+    </div>
+
+    <script>
+        let positions = [];
+        let compassEnabled = false;
+        let orientationListener = null;
+
+        // DOM elements
+        const enableBtn = document.getElementById('enableBtn');
+        const captureBtn = document.getElementById('captureBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const status = document.getElementById('status');
+        const results = document.getElementById('results');
+        const positionsList = document.getElementById('positions-list');
+        const headingDifference = document.getElementById('heading-difference');
+
+        // Request compass permission and enable orientation tracking
+        async function enableCompass() {
+            try {
+                let permissionGranted = true;
+
+                // Request permission for iOS 13+
+                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    const permission = await DeviceOrientationEvent.requestPermission();
+                    permissionGranted = permission === 'granted';
+                }
+
+                if (permissionGranted) {
+                    // Start listening to device orientation
+                    orientationListener = handleDeviceOrientation;
+                    window.addEventListener('deviceorientation', orientationListener);
+                    
+                    compassEnabled = true;
+                    enableBtn.style.display = 'none';
+                    captureBtn.disabled = false;
+                    updateStatus('Ready to capture positions. Keep device level (green bubble)!', 'ready');
+                } else {
+                    updateStatus('Compass permission denied. Please enable in Safari settings.', 'error');
+                }
+            } catch (error) {
+                console.error('Error enabling compass:', error);
+                updateStatus('Error enabling compass. Make sure you\'re using HTTPS.', 'error');
+            }
+        }
+
+        // Handle device orientation updates
+        function handleDeviceOrientation(event) {
+            const beta = event.beta || 0;   // X-axis tilt (-180 to 180)
+            const gamma = event.gamma || 0; // Y-axis tilt (-90 to 90)
+            
+            // Update visual bubble position
+            const bubble = document.getElementById('bubble');
+            const maxOffset = 45; // pixels
+            
+            // Convert tilt to bubble position (invert for intuitive movement)
+            const xOffset = Math.max(-maxOffset, Math.min(maxOffset, -gamma * 1.5));
+            const yOffset = Math.max(-maxOffset, Math.min(maxOffset, beta * 1.5));
+            
+            bubble.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            
+            // Update text readings
+            document.getElementById('tilt-x').textContent = `${beta.toFixed(1)}°`;
+            document.getElementById('tilt-y').textContent = `${gamma.toFixed(1)}°`;
+            
+            // Change bubble color based on how level the device is
+            const totalTilt = Math.sqrt(beta*beta + gamma*gamma);
+            bubble.className = 'level-bubble ' + 
+                (totalTilt < 8 ? 'level-good' : 
+                 totalTilt < 20 ? 'level-okay' : 'level-bad');
+            
+            // Update status based on level
+            if (compassEnabled && captureBtn && !captureBtn.disabled) {
+                if (totalTilt < 8) {
+                    updateStatus('Device is level - ready to capture!', 'ready');
+                } else {
+                    updateStatus('Level your device (aim for green bubble)', 'waiting');
+                }
+            }
+        }
+
+        // Capture current position
+        async function capturePosition() {
+            if (!compassEnabled) return;
+
+            captureBtn.disabled = true;
+            updateStatus('Capturing position... keep device steady and level', 'waiting');
+
+            try {
+                const reading = await getCurrentCompassReading();
+                
+                if (reading) {
+                    positions.push({
+                        heading: reading.compass,
+                        beta: reading.beta,
+                        gamma: reading.gamma,
+                        timestamp: Date.now(),
+                        index: positions.length + 1
+                    });
+
+                    updatePositionsList();
+                    
+                    if (positions.length >= 2) {
+                        calculateAndDisplayDifference();
+                    }
+
+                    updateStatus(`Position ${positions.length} captured! ${reading.compass.toFixed(1)}°`, 'ready');
+                } else {
+                    updateStatus('Failed to get compass reading. Try again.', 'error');
+                }
+            } catch (error) {
+                console.error('Error capturing position:', error);
+                updateStatus('Error capturing position. Try again.', 'error');
+            }
+
+            setTimeout(() => {
+                captureBtn.disabled = false;
+            }, 1000);
+        }
+
+        // Get current compass reading
+        function getCurrentCompassReading() {
+            return new Promise((resolve) => {
+                let attempts = 0;
+                const maxAttempts = 10;
+
+                function tryReading(event) {
+                    attempts++;
+                    const beta = event.beta || 0;
+                    const gamma = event.gamma || 0;
+                    const totalTilt = Math.sqrt(beta*beta + gamma*gamma);
+
+                    // Accept reading if device is reasonably level or we've tried enough times
+                    if (totalTilt < 15 || attempts >= maxAttempts) {
+                        window.removeEventListener('deviceorientation', tryReading);
+                        const compass = event.webkitCompassHeading ?? event.alpha ?? 0;
+                        resolve({
+                            compass: compass,
+                            beta: beta,
+                            gamma: gamma
+                        });
+                    }
+                }
+
+                window.addEventListener('deviceorientation', tryReading);
+
+                // Timeout after 5 seconds
+                setTimeout(() => {
+                    window.removeEventListener('deviceorientation', tryReading);
+                    resolve(null);
+                }, 5000);
+            });
+        }
+
+        // Update positions list display
+        function updatePositionsList() {
+            if (positions.length === 0) {
+                results.style.display = 'none';
+                return;
+            }
+
+            results.style.display = 'block';
+            positionsList.innerHTML = positions.map((pos, index) => `
+                <div class="position-item">
+                    <span><strong>Position ${index + 1}:</strong></span>
+                    <span>${pos.heading.toFixed(1)}° (${new Date(pos.timestamp).toLocaleTimeString()})</span>
+                </div>
+            `).join('');
+        }
+
+        // Calculate and display heading difference
+        function calculateAndDisplayDifference() {
+            if (positions.length < 2) return;
+
+            const pos1 = positions[positions.length - 2];
+            const pos2 = positions[positions.length - 1];
+            
+            let difference = pos2.heading - pos1.heading;
+            
+            // Handle wrap-around (e.g., from 350° to 10°)
+            if (difference > 180) difference -= 360;
+            if (difference < -180) difference += 360;
+            
+            const direction = difference > 0 ? 'clockwise' : 'counterclockwise';
+            const absDifference = Math.abs(difference);
+
+            headingDifference.innerHTML = `
+                <div class="heading-difference">
+                    📐 <strong>Heading Change:</strong><br>
+                    ${absDifference.toFixed(1)}° ${direction}<br>
+                    <small>From ${pos1.heading.toFixed(1)}° to ${pos2.heading.toFixed(1)}°</small>
+                </div>
+            `;
+            headingDifference.style.display = 'block';
+        }
+
+        // Clear all positions
+        function clearAllPositions() {
+            positions = [];
+            updatePositionsList();
+            headingDifference.style.display = 'none';
+            updateStatus('All positions cleared. Ready to capture new positions.', 'ready');
+        }
+
+        // Update status message
+        function updateStatus(message, type) {
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+
+        // Event listeners
+        enableBtn.addEventListener('click', enableCompass);
+        captureBtn.addEventListener('click', capturePosition);
+        clearBtn.addEventListener('click', clearAllPositions);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if we're on HTTPS
+            if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+                updateStatus('This tool requires HTTPS to access compass data.', 'error');
+                enableBtn.disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>
