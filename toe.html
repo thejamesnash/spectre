@@ -657,8 +657,10 @@
             const rightWheel = measurements.rightWheel.heading;
 
             // Calculate toe for each wheel relative to datum
+            // Left wheel: positive = toe-in (pointing right), negative = toe-out (pointing left)
             let leftToe = leftWheel - datum;
-            let rightToe = rightWheel - datum;
+            // Right wheel: negative = toe-in (pointing left), positive = toe-out (pointing right)
+            let rightToe = -(rightWheel - datum); // Note the negative sign to flip the convention
 
             // Handle angle wrap-around
             if (leftToe > 180) leftToe -= 360;
