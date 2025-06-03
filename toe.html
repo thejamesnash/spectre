@@ -444,7 +444,6 @@
 
         <div style="text-align: center; margin-top: 15px;">
             <button class="control-btn" id="resetBtn">🔄 Reset All</button>
-            <button class="control-btn" id="helpBtn">❓ Help</button>
         </div>
 
         <!-- Results -->
@@ -473,43 +472,7 @@
         </div>
     </div>
 
-    <!-- Help Modal -->
-    <div id="help-modal" class="hidden" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px;">
-        <div style="background: white; border-radius: 15px; padding: 25px; max-width: 400px; max-height: 80vh; overflow-y: auto;">
-            <h3>🚗 How to Use This Tool</h3>
-            <div style="text-align: left; line-height: 1.6; font-size: 14px;">
-                <p><strong>Setup:</strong></p>
-                <ul>
-                    <li>Park on level ground</li>
-                    <li>Wheels pointed straight ahead</li>
-                    <li>Engine off, parking brake on</li>
-                </ul>
-                
-                <p><strong>Measurement Steps:</strong></p>
-                <ol>
-                    <li><strong>Car Datum:</strong> Place phone against car centerline (door frame, hood line)</li>
-                    <li><strong>Left Wheel:</strong> Align phone with left wheel's travel direction</li>
-                    <li><strong>Right Wheel:</strong> Align phone with right wheel's travel direction</li>
-                </ol>
-                
-                <p><strong>Tips:</strong></p>
-                <ul>
-                    <li>Keep phone level (green bubble)</li>
-                    <li>Hold steady during measurement</li>
-                    <li>Take multiple readings for accuracy</li>
-                    <li>Avoid magnetic interference (tools, metal)</li>
-                </ul>
-                
-                <p><strong>Toe Values:</strong></p>
-                <ul>
-                    <li><strong>Positive:</strong> Toe-in (wheels point inward)</li>
-                    <li><strong>Negative:</strong> Toe-out (wheels point outward)</li>
-                    <li><strong>Typical spec:</strong> 0° to +0.5° total toe</li>
-                </ul>
-            </div>
-            <button class="measurement-btn" onclick="document.getElementById('help-modal').classList.add('hidden')" style="margin-top: 15px;">Got It!</button>
-        </div>
-    </div>
+
 
     <script>
         // Measurement data
@@ -887,9 +850,6 @@
         leftWheelBtn.addEventListener('click', () => measureComponent('leftWheel', leftWheelBtn));
         rightWheelBtn.addEventListener('click', () => measureComponent('rightWheel', rightWheelBtn));
         resetBtn.addEventListener('click', resetAll);
-        helpBtn.addEventListener('click', () => {
-            document.getElementById('help-modal').classList.remove('hidden');
-        });
 
         // Add specification comparison event listeners
         document.getElementById('target-toe').addEventListener('input', compareToSpecs);
