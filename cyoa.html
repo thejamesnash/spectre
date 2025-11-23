@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>C.Y.O.A.</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+        <style>
+            html, body, main, h1, p {
+                margin: 0;
+                padding: 0;
+            }
+            
+            body {
+                background-color: rgb(48, 58, 52);
+                font-family: "IBM Plex Mono", monospace;
+                font-weight: 400;
+                font-style: normal;
+                color: rgb(217,184,49);
+                text-shadow: 2px 2px 2px rgb(26, 32, 28);
+            }
+            main {
+                position: relative;
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+            }
+            section:after {
+                content: '';
+                width: 100vw;
+                height: 100vh;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: repeating-linear-gradient(transparent, transparent 2px, black 3px, black 3px);
+                -webkit-user-select: none; 
+                -ms-user-select: none;
+                user-select: none; 
+            } 
+            h1, h2 {
+                font-size: 20px;
+                border-bottom: 2px dashed rgb(217,184,49);
+                margin-bottom: 10vh
+            }
+            p {
+               padding: 0 0 5vh;
+            }
+            input {
+                background-color: transparent;
+                border: 2px solid  rgb(217,184,49);
+            }
+
+            section {
+                height: 100vh;
+                width: 100vw;
+                box-sizing: border-box;
+                padding: 5vw;
+                position: relative;
+            }
+            footer {
+                position: absolute;
+                bottom: 0;
+            }
+
+            a {
+                position: relative;
+                z-index: 2;
+                color: rgb(217,184,49);
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <section id="1">
+                <p>It is a dark winter evening.</p>
+                <p>You are comfortable and warm.</p>
+                <p>Suddenly there is a KNOCK ON THE DOOR</p>
+                <p>"Who on earth could that be?" you wonder.</p>
+                <p>You open the door and there, on the doorstep, is a mysterious envelope.</p>
+                <p>Do you pick up the envelope or turn back to the comfort of your home?</p>
+                <footer>
+                    <ul>
+                        <li>To pick up the envelope: <a href="#3">go to page 16</a></li>
+                        <li>To retreat back into the house: <a href="#2">go to page 4</a></li>
+                    </ul>
+                </footer>
+            </section>
+            <section id="2">
+                <p>"Probably junk" you think.</p>
+                <p>You close the door and start walking back to your seat.</p>
+                <p>You settle back onto the sofa. Isn't junk mail usually flyers and things? That was a proper envelope with some kind of symbol on it.</p>
+                <p>You decide to have another look. You go back to the door and pick up the envelope.</p>
+                <footer>
+                    <ul>
+                        <li>You've picked up the envelope. <a href="#3">go to page 16</a></li>
+                    </ul>
+                </footer>
+            </section>
+            <section id="3">
+                <p>The envelope is light. There is a symbol on it of a skull inside a triangle.</p>
+                <p>"Not the friendliest junk mail" you think.</p>
+                <p>You go back inside, sit at the kitchen table and open the envelope.</p>
+                <p>Inside is an old, crude map. There are no markings to suggest a specific geographic location.</p>
+                <p>"Wait! That looks like a rendering of Eastham Woods if drawn by someone with catastrophic retardation!"</p>
+                <p>Do you follow the map or do you give up on this most tantalising mystery?</p>
+                <footer>
+                    <ul>
+                        <li>To follow the map: <a href="#4">go to page 13</a></li>
+                        <li>To give up: <a href="#5">go to page 3</a></li>
+                    </ul>
+                </footer>
+            </section>
+            <section id="4">
+                <p>You follow the crude clues on the map and find a curious wooden box.</p>
+                <p>The box emanates an aura of dread. You are repulsed but also drawn it.</p>
+                <p>Do you open the box or bury it deep so it can cause no futher horrors?</p>
+                <footer>
+                    <ul>
+                        <li>To open the box: <a href="#6">go to page 20</a></li>
+                        <li>To bury the box: <a href="#7">go to page 31</a></li>
+                    </ul>
+                </footer>
+            </section>
+            <section id="5">
+                <p>You shrug and throw the envelope in the bin.</p>
+                <p>You go back upstairs and never think of it again.</p>
+                <p>After many years, you die in your sleep of boredom.</p>
+                <p>THE END</p>
+                <footer>
+                    <ul>
+                        <li>To make better decisions: <a href="#3">go to page 13</a></li>
+                    </ul>
+                </footer>
+            </section>
+            <section id="6">
+                <p>You open the box. Its contents gleam with a sickening light.</p>
+                <p>You are ensnared by its power. You are filled with the certain knowledge that YOU MUST KEEP IT SAFE.</p>
+                <p>You return home and try to carry on with your life, but in the back of your mind, you know that soon enough the artifact will lead you on an adventure that you may not survive.</p>
+                <p>END OF CHAPTER 1</p>
+            </section>
+            <section id="7">
+                <p>Shuddering, you dig a hole in the cold wet ground and thrust the box inside.</p>
+                <p>Chilled by your close encounter with adventure, you run back to the safety of your house.</p>
+                <p>You go upstairs and never think of it again.</p>
+                <p>After many years, you die in your sleep of an incurable testicle infection.</p>
+                <p>THE END</p>
+                <footer>
+                    <ul>
+                        <li>To make better decisions: <a href="#4">go to page 13</a></li>
+                    </ul>
+                </footer>
+            </section>
+        </main>
+        
+    </body>
+</html>
