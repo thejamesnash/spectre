@@ -2,20 +2,16 @@
 <html>
   <head>
     <title>COUNTDOWN</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
-
     <style>
             
         body {
             box-sizing: border-box;
-            height: 100vh;
-            width: 100vw;
-            background: #fddbeb url('https://marinesanctuary.org/floridakeysfoundation/wp-content/uploads/sites/4/2020/11/Frink_NMSF_41.jpg') bottom right no-repeat;
-            background-size: cover;
-            /* font-family: "Helvetica Neue", "Open Sans", helvetica, arial, sans-serif; */
-            font-family: "Rye", cursive;
+            height: 100dvh;
+            width: 100dvw;
+            background: #FFF url('badge.svg') top center no-repeat;
+            background-size: contain;
+            font-family: "Helvetica Neue", "Open Sans", helvetica, arial, sans-serif;
+            font-family: "Georgia", serfi;
             font-weight: 400;
             font-style: normal;
             display: flex;
@@ -28,9 +24,9 @@
 
         main {  
             font-size: 15vw;
-            color: #FFFFFF;
-            text-shadow: 0 0 2vw #FFF;
+            color: #333;
             width: 75vw;
+            padding-bottom: 5vh;
         }
         
         div {
@@ -42,22 +38,25 @@
             width: 35%;
             text-align: right;
             font-weight: 400;
+            text-shadow: 0.2vw 0.2vw 0 white;
         }
         span {
-            color: #FFFFFF;
-            text-shadow: 0 0 2vw #FFF; 
+            color: #333;
             text-align: left;
             width: 60%;
-            font-size: 8vw
+            font-size: 8vw;
+            text-shadow: 0.2vw 0.2vw 0 white;
         }
     
     </style>
   </head>
   <body>
-    <main id="timer"></main>
+    <main id="timer">
+    </main>
     <script>
       const updateTimer = () => {
-        future  = new Date(1770287401 * 1000);
+        future  = new Date(1770276000 * 1000);
+        
         now     = new Date();
         diff    = future - now;
 
