@@ -10,6 +10,8 @@ body {
 	text-align: center;
 	position: relative;
 	height: 100dvh;
+    width: 100vw;
+    overflow: hidden;
 }
 body > div {
 	display: flex;
