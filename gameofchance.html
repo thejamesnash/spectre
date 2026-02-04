@@ -2,13 +2,70 @@
 <html>
   <head>
     <title>GAME OF CHANCE</title>
+    <link rel="stylesheet" href="goc.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <div id="winner">
-        <ul>
-          <li>person</li>
-        </ul>
-    </div>
-    <button id="spin">PLAY THE GAME OF CHANCE!</button>
+    <div>
+	<ul data-state="">
+		<li style="--stylezindex: 12; --rotate: -75deg;  --fanrotate: -150deg; --delay: 6s; --zdistance: 10px" data-src="bob">
+			<span class="front" data-src="bob"></span>
+			<span class="back"></span>
+		</li>
+		<li style="--stylezindex: 1; --rotate: -60deg;  --fanrotate: -120deg; --delay: 5.5s; --zdistance: 20px" data-src="nash">
+			<span class="front" data-src="nash"></span>
+			<span class="back"></span>
+		</li>
+		<li style="--stylezindex: 11; --rotate: -45deg;  --fanrotate: -90deg; --delay: 5s; --zdistance: 30px" data-src="dan">
+			<span class="front"></span>
+			<span class="back"></span>
+		</li>
+		<li style="--stylezindex: 2; --rotate: -30deg;  --fanrotate: -60deg; --delay: 4.5s;  --zdistance: 40px" data-src="ben">
+			<span class="front" data-src="ben"></span>
+			<span class="back"></span>
+		</li>
+		<li style="--stylezindex: 10; --rotate: -15deg; --fanrotate: -30deg; --delay: 4s;  --zdistance: 50px" data-src="g">
+			<span class="front" data-src="g"></span>
+			<span class="back"></span>
+		</li>
+		<li style="--stylezindex: 3; --rotate: 0deg; --fanrotate: 0deg; --delay: 3.5s;  --zdistance: 60px" data-src="con">
+			<span class="front" data-src="con"></span>
+			<span class="back"></span>
+		</li>
+		<li style="--stylezindex: 9; --rotate: 15deg; --fanrotate: 30deg; --delay: 3s;  --zdistance: 70px" data-src="fod">
+			<span class="front" data-src="fod"></span>
+			<span class="back"></span>
+		</li>
+		<li style="--stylezindex: 4; --rotate: 30deg; --fanrotate: 60deg; --delay: 2.5s;  --zdistance: 80px" data-src="ste">
+			<span class="front" data-src="ste"></span>
+			<span class="back"></span>
+		</li>
+		<li style="--stylezindex: 8; --rotate: 45deg; --fanrotate: 90deg; --delay: 2s;  --zdistance: 90px"  data-src="ian">
+			<span class="front" data-src="ian"></span>
+			<span class="back"></span>
+		</li>
+		<li style="--stylezindex: 5; --rotate: 60deg; --fanrotate: 120deg; --delay: 1.5s;  --zdistance: 100px" data-src="earl">
+			<span class="front" data-src="earl"></span>
+			<span class="back"></span>
+		</li>
+		<li style="--stylezindex: 7; --rotate: 75deg; --fanrotate: 150deg; --delay: 1s;  --zdistance: 110px" data-src="dave">
+			<span class="front" data-src="dave"></span>
+			<span class="back"></span>
+		</li>
+		<li style="--stylezindex: 6; --rotate: 90deg; --fanrotate: 180deg; --delay: 0.5s;  --zdistance: 120px" data-src="liam">
+			<span class="front" data-src="liam"></span>
+			<span class="back"></span>
+		</li>
+	</ul>
+	<div class="buttons">
+		<button id="shuffle">Shuffle</button>
+		<button id="show">Show</button>
+		<button id="pick">Pick</button>
+		<!-- <button class="cheat">Cheat</button>
+		<button class="cheat">Cheat</button> -->
+	</div>
+</div>
+<script src="goc.js"></script>
+
   </body>
  </html>
